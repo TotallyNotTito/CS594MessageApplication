@@ -1,0 +1,23 @@
+{
+  "name": "cs594messageapplication",
+  "version": "1.0.0",
+  "description": "CS594 Project - Chat Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TotallyNotTito/CS594MessageApplication.git"
+  },
+  "author": "Joshua Wachana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TotallyNotTito/CS594MessageApplication/issues"
+  },
+  "homepage": "https://github.com/TotallyNotTito/CS594MessageApplication#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
