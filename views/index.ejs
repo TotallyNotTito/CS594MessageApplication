@@ -7,7 +7,28 @@
     <title>Chat</title>
   </head>
   <body>
-    <h1>Welcome to the chat hompage</h1>
-    <p>Here, you will be able to select or create a room to join.</p>
+    <!-- <h1>Welcome to the chat hompage</h1>
+    <p>Here, you will be able to select or create a room to join.</p> -->
+
+    <h1>Chat Application</h1>
+    <form id="form-index-create-room" action="/add-room-to-index" method="post">
+      <div>
+        <label for="indexCreateRoom">Create Room: </label>
+        <input type="text" name="indexCreateRoom" id="indexCreateRoom" />
+        <input type="submit" value="Create Room" />
+      </div>
+    </form>
+    <form action="" method="">
+      <div>
+        <label for="indexSelectRoom">Select a Room to Join: </label>
+        <select name="indexSelectRoom" id="indexSelectRoom">
+          <option disabled value="">Select a Room from below......</option>
+          <% indexPageRooms.forEach(room => { %>
+          <option value="#"><%= room %></option>
+          <% }) %>
+        </select>
+        <input type="submit" value="Join Room" />
+      </div>
+    </form>
   </body>
 </html>
