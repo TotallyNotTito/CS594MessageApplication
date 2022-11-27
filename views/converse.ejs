@@ -5,11 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Conversations</title>
+    <link rel="stylesheet" href="css/styles.css" />
     <script src="/socket.io/socket.io.js"></script>
-    <script src="client.js"></script>
+    <script defer src="client.js"></script>
   </head>
   <body>
     <h1>Conversations</h1>
-    <p>Here you will be able to message and converse.</p>
+    <div>
+      <div>User (You): <span id="username"><%= indexInfo.user %></span></div>
+      <div>
+        Current Chat Room: <span id="room"><%= indexInfo.room %></span>
+        <button>Leave Room</button>
+      </div>
+    </div>
+
+    <div>
+      Users In Room:
+      <ul>
+        <li>Test User 1</li>
+        <li>Test User 2</li>
+      </ul>
+    </div>
+    <div class="messages-container" id="mainMessagesContainer"></div>
+    <div class="send-message-container">
+      <form id="send-message-form">
+        <label for="messageToSend">Enter Message: </label>
+        <input id="messageToSend" type="text" required autocomplete="off" />
+        <input type="submit" value="Send Message" />
+      </form>
+    </div>
   </body>
 </html>

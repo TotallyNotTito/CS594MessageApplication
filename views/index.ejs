@@ -19,13 +19,15 @@
         <input type="submit" value="Create Room" />
       </div>
     </form>
-    <form action="" method="">
+    <form id="get-username-room" action="/converse" method="post">
       <div>
+        <label for="indexUserName">Enter a Username: </label>
+        <input type="text" name="indexUsername" id="indexUsername" />
         <label for="indexSelectRoom">Select a Room to Join: </label>
         <select name="indexSelectRoom" id="indexSelectRoom">
           <option disabled value="">Select a room from below......</option>
           <% indexPageRooms.forEach(room => { %>
-          <option value="#"><%= room %></option>
+          <option value="<%= room %>"><%= room %></option>
           <% }) %>
         </select>
         <input type="submit" value="Join Room" />
