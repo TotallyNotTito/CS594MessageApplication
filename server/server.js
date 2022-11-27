@@ -42,6 +42,11 @@ io.on('connection', (socket) => {
           `A new user (${client.username}) has joined the chat, the chat just got more real!`
         )
       );
+
+    io.to(client.room).emit('usersInRoom', {
+      room: client.room,
+      roomUsers: getUsersInRoom(client.room),
+    });
   });
 
   socket.on('userMessage', (messageToSend) => {
@@ -59,6 +64,11 @@ io.on('connection', (socket) => {
         'message',
         formatMsg(APP_NAME, `A user (${client.username}) has left the chat!`)
       );
+
+      io.to(client.room).emit('usersInRoom', {
+        room: client.room,
+        roomUsers: getUsersInRoom(client.room),
+      });
     }
   });
 });

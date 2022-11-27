@@ -2,10 +2,15 @@ const sendMessageForm = document.querySelector('#send-message-form');
 const messagesContainer = document.querySelector('#mainMessagesContainer');
 const username = document.getElementById('username').textContent;
 const room = document.getElementById('room').textContent;
+const listUsers = document.getElementById('listUsers');
 
 const socket = io();
 
 socket.emit('joinRoom', { username, room });
+
+socket.on('usersInRoom', ({ users, roomUsers }) => {
+  displayUsers(roomUsers);
+});
 
 socket.on('message', (message) => {
   console.log(message);
@@ -38,3 +43,12 @@ const handleSendMessageFormSubmission = (event) => {
 };
 
 sendMessageForm.addEventListener('submit', handleSendMessageFormSubmission);
+
+const displayUsers = (roomUsers) => {
+  listUsers.innerHTML = '';
+  roomUsers.forEach((user) => {
+    const userListItem = document.createElement('li');
+    userListItem.textContent = `${user.username}`;
+    listUsers.append(userListItem);
+  });
+};
