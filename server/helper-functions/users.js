@@ -10,8 +10,21 @@ const joinUser = (id, username, room) => {
   return userObject;
 };
 
-const getCurrentUser = (id) => {
+const getCurrUser = (id) => {
   const currentUser = usersArray.find((user) => user.id === id);
+  return currentUser;
 };
 
-module.exports = { joinUser, getCurrentUser };
+const leaveUser = (id) => {
+  const index = usersArray.findIndex((user) => user.id === id);
+
+  if (index !== -1) {
+    return usersArray.splice(index, 1)[0];
+  }
+};
+
+const getUsersInRoom = (room) => {
+  return usersArray.filter((user) => user.room === room);
+};
+
+module.exports = { joinUser, getCurrUser, leaveUser, getUsersInRoom };

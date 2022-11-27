@@ -4,6 +4,12 @@ const PORT = 3000;
 const http = require('http');
 const socketio = require('socket.io');
 const formatMsg = require('./helper-functions/format.js');
+const {
+  joinUser,
+  getCurrUser,
+  leaveUser,
+  getUsersInRoom,
+} = require('./helper-functions/users.js');
 
 const APP_NAME = 'Real-Chat-App';
 
@@ -23,19 +29,37 @@ const indexPageRooms = require('./helper-functions/index-page-helper');
 
 io.on('connection', (socket) => {
   socket.on('joinRoom', ({ username, room }) => {
+    const client = joinUser(socket.id, username, room);
+    socket.join(client.room);
+
     socket.emit('message', formatMsg(APP_NAME, 'Welcome to Real-Chat-App!'));
-    socket.broadcast.emit(
-      'message',
-      formatMsg(APP_NAME, 'A new user has joined, the chat just got more real!')
-    );
+    socket.broadcast
+      .to(client.room)
+      .emit(
+        'message',
+        formatMsg(
+          APP_NAME,
+          `A new user (${client.username}) has joined the chat, the chat just got more real!`
+        )
+      );
   });
 
   socket.on('userMessage', (messageToSend) => {
-    io.emit('message', formatMsg(`USER Test`, messageToSend));
+    const client = getCurrUser(socket.id);
+    io.to(client.room).emit(
+      'message',
+      formatMsg(`${client.username}`, messageToSend)
+    );
   });
 
   socket.on('disconnect', () => {
-    io.emit('message', formatMsg(APP_NAME, 'A user has left the chat!'));
+    const client = leaveUser(socket.id);
+    if (client) {
+      io.to(client.room).emit(
+        'message',
+        formatMsg(APP_NAME, `A user (${client.username}) has left the chat!`)
+      );
+    }
   });
 });
 
