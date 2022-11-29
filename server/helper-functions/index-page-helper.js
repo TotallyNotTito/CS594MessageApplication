@@ -1,2 +1,2 @@
-const indexPageRooms = ['Test Room 1', 'Test Room 2'];
+const indexPageRooms = ['Room1', 'Room2'];
 module.exports = indexPageRooms;

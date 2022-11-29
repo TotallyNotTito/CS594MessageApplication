@@ -12,24 +12,53 @@
   <body>
     <h1>Conversations</h1>
     <div>
-      <div>User (You): <span id="username"><%= indexInfo.user %></span></div>
-      <div>
-        Current Chat Room: <span id="room"><%= indexInfo.room %></span>
-        <button>Leave Room</button>
-      </div>
+      <a href="http://localhost:3000/"
+        ><button>Got Back To Main Page</button></a
+      >
     </div>
+    <main>
+      <div id="initialRoomContainer" class="roomContainer">
+        <div id="initialRoom">
+          <div>
+            User (You): <span id="username"><%= indexInfo.user %></span>
+          </div>
+          <div>
+            Current Chat Room: <span id="room"><%= indexInfo.room %></span>
+            <button id="leaveInitialRoomBtn">Leave Room</button>
+          </div>
+        </div>
 
-    <div>
-      Users In Room:
-      <ul id="listUsers"></ul>
-    </div>
-    <div class="messages-container" id="mainMessagesContainer"></div>
-    <div class="send-message-container">
-      <form id="send-message-form">
-        <label for="messageToSend">Enter Message: </label>
-        <input id="messageToSend" type="text" required autocomplete="off" />
-        <input type="submit" value="Send Message" />
-      </form>
-    </div>
+        <div>
+          Users In Current Room:
+          <ul id="listUsers"></ul>
+        </div>
+        <div id="additionalFormContainer">
+          <form id="additionalRoomForm">
+            <label for="additionalSelectRoom"
+              >Select an Additional Room to Join:
+            </label>
+            <select name="additionalSelectRoom" id="additionalSelectRoom">
+              <option disabled value="">Select a room from below......</option>
+              <% conversePageRooms.forEach(room => { %>
+              <option value="<%= room %>"><%= room %></option>
+              <% }) %>
+            </select>
+            <input type="submit" value="Join Additional Room" />
+          </form>
+        </div>
+        <div class="messages-container" id="mainMessagesContainer"></div>
+        <div class="send-message-container">
+          <form id="send-message-form">
+            <label for="messageToSend">Enter Message: </label>
+            <input id="messageToSend" type="text" required autocomplete="off" />
+            <input type="submit" value="Send Message" />
+          </form>
+        </div>
+      </div>
+      <div
+        class="parent-messages-container2"
+        id="parent-messages-container2"
+      ></div>
+    </main>
   </body>
 </html>
